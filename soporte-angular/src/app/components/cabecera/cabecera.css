@@ -1,6 +1,17 @@
 .cabecera{
-  background:#0b4f8a;
-  color:white;
-  text-align:center;
-  padding:20px;
+  padding: clamp(1.5rem, 4vw, 2.25rem) 1rem;
+  background: linear-gradient(120deg, #0b4f8a, #1769aa);
+  color: #fff;
+  text-align: center;
+}
+
+.cabecera h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  letter-spacing: -0.035em;
+}
+
+.cabecera p {
+  margin: 0.45rem 0 0;
+  color: #d7eaff;
 }

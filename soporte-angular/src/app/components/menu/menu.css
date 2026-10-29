@@ -1,0 +1,39 @@
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  padding: 0.8rem 1rem;
+  background: #fff;
+  box-shadow: 0 4px 14px rgb(23 54 93 / 7%);
+}
+
+nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0.65rem 1.1rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  color: #3d526e;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 150ms ease, background 150ms ease, border-color 150ms ease;
+}
+
+nav a:hover {
+  border-color: #d8e6f4;
+  background: #f1f7fc;
+  color: var(--color-primary-dark);
+}
+
+nav a.active {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+nav a:focus-visible {
+  outline: 3px solid rgb(23 105 170 / 35%);
+  outline-offset: 2px;
+}

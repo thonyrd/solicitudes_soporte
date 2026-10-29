@@ -1,1 +1,61 @@
-<p>editar-ticket works!</p>
+<h2>Editar petición de soporte</h2>
+
+@if (cargando()) {
+  <p role="status">Cargando petición...</p>
+} @else if (error()) {
+  <p class="form-message" role="alert">{{ error() }}</p>
+} @else {
+  <form class="ticket-form" [formGroup]="formulario" (ngSubmit)="guardar()">
+    <div class="form-field">
+      <label for="asunto">Asunto</label>
+      <input id="asunto" type="text" formControlName="asunto" required>
+    </div>
+
+    <div class="form-field">
+      <label for="solicitante">Solicitante</label>
+      <input id="solicitante" type="text" formControlName="solicitante" required>
+    </div>
+
+    <div class="form-field form-field--wide">
+      <label for="descripcion">Descripción</label>
+      <textarea id="descripcion" formControlName="descripcion" required></textarea>
+    </div>
+
+    <div class="form-field">
+      <label for="categoria">Categoría</label>
+      <select id="categoria" formControlName="categoria" required>
+        <option value="Hardware">Hardware</option>
+        <option value="Software">Software</option>
+        <option value="Redes">Redes</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="prioridad">Prioridad</label>
+      <select id="prioridad" formControlName="prioridad" required>
+        <option value="Baja">Baja</option>
+        <option value="Media">Media</option>
+        <option value="Alta">Alta</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="estado">Estado</label>
+      <select id="estado" formControlName="estado" required>
+        <option value="Pendiente">Pendiente</option>
+        <option value="En Proceso">En Proceso</option>
+        <option value="Resuelto">Resuelto</option>
+      </select>
+    </div>
+
+    <div class="form-field">
+      <label for="fechaRegistro">Fecha de registro</label>
+      <input id="fechaRegistro" type="date" formControlName="fechaRegistro" readonly>
+    </div>
+
+    <div class="form-actions">
+      <button class="button-secondary" type="button" (click)="cancelar()">Cancelar</button>
+      <button type="submit">Guardar cambios</button>
+    </div>
+  </form>
+}

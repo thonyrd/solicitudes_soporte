@@ -1,26 +1,69 @@
-<h2>Registrar Ticket</h2>
+<h2>Registrar petición de soporte</h2>
 
-<form>
+<form class="ticket-form" [formGroup]="formulario" (ngSubmit)="guardar()">
+  <div class="form-field">
+    <label for="asunto">Asunto</label>
+    <input
+      id="asunto"
+      type="text"
+      formControlName="asunto"
+      placeholder="Ej. No puedo acceder al correo"
+      required>
+  </div>
 
-  <input
-    type="text"
-    placeholder="Asunto">
+  <div class="form-field">
+    <label for="solicitante">Solicitante</label>
+    <input
+      id="solicitante"
+      type="text"
+      formControlName="solicitante"
+      placeholder="Nombre de quien solicita"
+      required>
+  </div>
 
-  <input
-    type="text"
-    placeholder="Solicitante">
+  <div class="form-field form-field--wide">
+    <label for="descripcion">Descripción</label>
+    <textarea
+      id="descripcion"
+      formControlName="descripcion"
+      placeholder="Describe el problema con el mayor detalle posible"
+      required></textarea>
+  </div>
 
-  <textarea
-    placeholder="Descripción"></textarea>
+  <div class="form-field">
+    <label for="categoria">Categoría</label>
+    <select id="categoria" formControlName="categoria" required>
+      <option value="" disabled>Selecciona una categoría</option>
+      <option value="Hardware">Hardware</option>
+      <option value="Software">Software</option>
+      <option value="Redes">Redes</option>
+    </select>
+  </div>
 
-  <select>
-    <option>Hardware</option>
-    <option>Software</option>
-    <option>Redes</option>
-  </select>
+  <div class="form-field">
+    <label for="prioridad">Prioridad</label>
+    <select id="prioridad" formControlName="prioridad" required>
+      <option value="" disabled>Selecciona una prioridad</option>
+      <option value="Baja">Baja</option>
+      <option value="Media">Media</option>
+      <option value="Alta">Alta</option>
+    </select>
+  </div>
 
-  <button>
-    Guardar
-  </button>
+  <div class="form-field">
+    <label for="estado">Estado</label>
+    <select id="estado" formControlName="estado" required>
+      <option value="Pendiente">Pendiente</option>
+      <option value="En Proceso">En Proceso</option>
+      <option value="Resuelto">Resuelto</option>
+    </select>
+  </div>
 
+  @if (error()) {
+    <p class="form-message" role="alert">{{ error() }}</p>
+  }
+
+  <div class="form-actions">
+    <button type="submit">Guardar petición</button>
+  </div>
 </form>
