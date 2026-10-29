@@ -1,116 +1,294 @@
-/* Contenedor principal opcional para dar margen */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  background-color: #ffffff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  border-radius: 8px;
-  overflow: hidden;
+.ticket-filters {
+  display: grid;
+  grid-template-columns: minmax(200px, 1.5fr) minmax(220px, 2fr) minmax(150px, 1fr) auto;
+  align-items: end;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #e3eaf2;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 6px 18px rgb(23 54 93 / 5%);
 }
 
-/* Estilos de encabezado */
+.search-field,
+.status-filter {
+  display: grid;
+  gap: 0.4rem;
+}
+
+.search-field label,
+.status-filter label,
+.priority-filters legend {
+  color: #334967;
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.search-field input,
+.status-filter select {
+  width: 100%;
+  min-height: 42px;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid #d7e0eb;
+  border-radius: 8px;
+  background: #fbfcfe;
+  color: #172b4d;
+}
+
+.search-field input:focus,
+.status-filter select:focus {
+  border-color: #1769aa;
+  outline: 3px solid rgb(23 105 170 / 14%);
+}
+
+.priority-filters {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.priority-filters legend {
+  margin-bottom: 0.4rem;
+}
+
+.priority-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.filter-chip,
+.clear-filters {
+  min-height: 38px;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid #d7e0eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #334967;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.filter-chip:hover,
+.clear-filters:not(:disabled):hover {
+  border-color: #1769aa;
+}
+
+.filter-chip--low {
+  color: #167445;
+}
+
+.filter-chip--medium {
+  color: #a45b00;
+}
+
+.filter-chip--high {
+  color: #b42318;
+}
+
+.filter-chip--active {
+  box-shadow: inset 0 0 0 1px currentColor;
+}
+
+.clear-filters:disabled {
+  color: #8a98a9;
+  cursor: not-allowed;
+}
+
+.ticket-count {
+  margin: 1rem 0 0.5rem;
+  color: #63748b;
+  font-size: 0.9rem;
+}
+
+.empty-filter-result {
+  padding: 1.25rem;
+  border: 1px dashed #c7d3e0;
+  border-radius: 10px;
+  background: #fff;
+  color: #63748b;
+  text-align: center;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin: 0 0 1.5rem;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  background: #fff;
+  box-shadow: 0 4px 12px rgb(23 54 93 / 5%);
+}
+
 thead {
-  background-color: #f8f9fa;
-  border-bottom: 2px solid #e9ecef;
+  border-bottom: 2px solid #e3eaf2;
+  background: #f8fafd;
 }
 
 th {
-  padding: 14px 16px;
-  font-weight: 600;
+  padding: 0.85rem 1rem;
+  color: #495d77;
+  font-size: 0.75rem;
+  font-weight: 700;
   text-align: left;
-  color: #495057;
   text-transform: uppercase;
-  font-size: 12px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.04em;
 }
 
-/* Estilos de filas y celdas */
 tbody tr {
-  border-bottom: 1px solid #eeeeee;
-  transition: background-color 0.2s ease;
+  border-bottom: 1px solid #edf1f5;
+  transition: background-color 150ms ease;
 }
 
 tbody tr:hover {
-  background-color: #fcfcfc;
+  background: #f8fafd;
 }
 
 td {
-  padding: 14px 16px;
-  color: #333333;
+  padding: 0.85rem 1rem;
+  color: #334967;
   vertical-align: middle;
 }
 
-/* Columna ID destacada sutilmente */
 td:first-child {
-  font-weight: bold;
-  color: #6c757d;
   width: 60px;
+  color: #63748b;
+  font-weight: 700;
 }
 
-/* Diseño de las etiquetas de Estado */
-td span {
+.priority-badge,
+.status-label {
   display: inline-block;
-  padding: 4px 10px;
-  border-radius: 50px;
-  font-size: 12px;
-  font-weight: 500;
-  text-align: center;
-  background-color: #e2e8f0;
-  color: #4a5568;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: #edf1f5;
+  color: #495d77;
+  font-size: 0.78rem;
+  font-weight: 650;
+  white-space: nowrap;
 }
 
-/* Estilos para Botones de Acción */
-td button {
-  padding: 6px 12px;
-  margin-right: 8px;
-  border: none;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 500;
+.priority-low {
+  background: #e8f6ee;
+  color: #167445;
+}
+
+.priority-medium {
+  background: #fff3df;
+  color: #a45b00;
+}
+
+.priority-high {
+  background: #fdebea;
+  color: #b42318;
+}
+
+.status-cell {
+  display: grid;
+  grid-template-columns: auto minmax(70px, 1fr) auto;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 190px;
+}
+
+.status-progress {
+  width: 100%;
+  height: 8px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 999px;
+  appearance: none;
+  background: #e4eaf1;
+}
+
+.status-progress::-webkit-progress-bar {
+  border-radius: 999px;
+  background: #e4eaf1;
+}
+
+.status-progress::-webkit-progress-value {
+  border-radius: 999px;
+  background: #e5a12b;
+}
+
+.status-progress::-moz-progress-bar {
+  border-radius: 999px;
+  background: #e5a12b;
+}
+
+.status-progress--complete::-webkit-progress-value,
+.status-progress--complete::-moz-progress-bar {
+  background: #25935f;
+}
+
+.progress-label {
+  color: #63748b;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.actions-cell {
+  white-space: nowrap;
+}
+
+.actions-cell button {
+  min-height: 34px;
+  margin-right: 0.4rem;
+  padding: 0.4rem 0.65rem;
+  border: 0;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
 }
 
-/* Botón Editar (Estilo primario/azul) */
-td button:first-child {
-  background-color: #3b82f6;
-  color: #ffffff;
+.actions-cell button:first-child {
+  background: #1769aa;
 }
 
-td button:first-child:hover {
-  background-color: #2563eb;
+.actions-cell button:first-child:hover {
+  background: #0b4f8a;
 }
 
-/* Botón Eliminar (Estilo peligro/rojo) */
-td button:last-child {
-  background-color: #ef4444;
-  color: #ffffff;
+.actions-cell button:last-child {
   margin-right: 0;
+  background: #c83d3d;
 }
 
-td button:last-child:hover {
-  background-color: #dc2626;
+.actions-cell button:last-child:hover {
+  background: #a92c2c;
 }
 
-/* ==========================================================================
-   TIP PRO: Estados de color automáticos
-   Si en tu HTML cambias el span por algo como: 
-   <span [class]="ticket.estado.toLowerCase()">{{ticket.estado}}</span>
-   ========================================================================== */
-td span.abierto, td span.open {
-  background-color: #d1fae5;
-  color: #065f46;
+@media (max-width: 760px) {
+  .ticket-filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .search-field,
+  .priority-filters {
+    grid-column: 1 / -1;
+  }
+
+  .clear-filters {
+    justify-self: start;
+  }
 }
 
-td span.progreso, td span.proceso {
-  background-color: #fef3c7;
-  color: #92400e;
-}
+@media (max-width: 480px) {
+  .ticket-filters {
+    grid-template-columns: 1fr;
+  }
 
-td span.cerrado, td span.close {
-  background-color: #e5e7eb;
-  color: #374151;
+  .search-field,
+  .priority-filters {
+    grid-column: auto;
+  }
 }

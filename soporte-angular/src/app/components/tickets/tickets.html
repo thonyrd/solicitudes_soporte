@@ -9,29 +9,112 @@
 } @else if (tickets().length === 0) {
   <p>No hay peticiones registradas.</p>
 } @else {
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Asunto</th>
-        <th>Solicitante</th>
-        <th>Estado</th>
-        <th>Acciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (ticket of tickets(); track ticket.id) {
-        <tr>
-          <td>{{ ticket.id }}</td>
-          <td>{{ ticket.asunto }}</td>
-          <td>{{ ticket.solicitante }}</td>
-          <td><span>{{ ticket.estado }}</span></td>
-          <td>
-            <button type="button" (click)="editar(ticket.id)">Editar</button>
-            <button type="button" (click)="eliminar(ticket.id)">Eliminar</button>
-          </td>
-        </tr>
-      }
-    </tbody>
-  </table>
+  <section class="ticket-filters" aria-label="Filtros de tickets">
+    <div class="search-field">
+      <label for="buscar-ticket">Buscar</label>
+      <input
+        id="buscar-ticket"
+        type="search"
+        placeholder="Asunto o solicitante"
+        [value]="busqueda()"
+        (input)="actualizarBusqueda($event)">
+    </div>
+
+    <fieldset class="priority-filters">
+      <legend>Prioridad</legend>
+      <div class="priority-options">
+        <button
+          type="button"
+          class="filter-chip"
+          [class.filter-chip--active]="filtroPrioridad() === 'Todas'"
+          [attr.aria-pressed]="filtroPrioridad() === 'Todas'"
+          (click)="filtroPrioridad.set('Todas')">Todas</button>
+        <button
+          type="button"
+          class="filter-chip filter-chip--low"
+          [class.filter-chip--active]="filtroPrioridad() === 'Baja'"
+          [attr.aria-pressed]="filtroPrioridad() === 'Baja'"
+          (click)="filtroPrioridad.set('Baja')">Baja</button>
+        <button
+          type="button"
+          class="filter-chip filter-chip--medium"
+          [class.filter-chip--active]="filtroPrioridad() === 'Media'"
+          [attr.aria-pressed]="filtroPrioridad() === 'Media'"
+          (click)="filtroPrioridad.set('Media')">Media</button>
+        <button
+          type="button"
+          class="filter-chip filter-chip--high"
+          [class.filter-chip--active]="filtroPrioridad() === 'Alta'"
+          [attr.aria-pressed]="filtroPrioridad() === 'Alta'"
+          (click)="filtroPrioridad.set('Alta')">Alta</button>
+      </div>
+    </fieldset>
+
+    <div class="status-filter">
+      <label for="filtrar-estado">Estado</label>
+      <select id="filtrar-estado" [value]="filtroEstado()" (change)="actualizarEstado($event)">
+        <option value="Todos">Todos</option>
+<!--        <option value="Abierto">Abierto</option>  -->
+        <option value="Pendiente">Pendiente</option>
+        <option value="En Proceso">En Proceso</option>
+        <option value="Resuelto">Resuelto</option>
+      </select>
+    </div>
+
+    <button
+      type="button"
+      class="clear-filters"
+      [disabled]="!busqueda() && filtroPrioridad() === 'Todas' && filtroEstado() === 'Todos'"
+      (click)="limpiarFiltros()">Limpiar filtros</button>
+  </section>
+
+  <p class="ticket-count" aria-live="polite">
+    Mostrando {{ ticketsFiltrados().length }} de {{ tickets().length }} tickets
+  </p>
+
+  @if (ticketsFiltrados().length === 0) {
+    <p class="empty-filter-result">No hay tickets que coincidan con los filtros seleccionados.</p>
+  } @else {
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Asunto</th>
+            <th>Solicitante</th>
+            <th>Prioridad</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (ticket of ticketsFiltrados(); track ticket.id) {
+            <tr>
+              <td>{{ ticket.id }}</td>
+              <td>{{ ticket.asunto }}</td>
+              <td>{{ ticket.solicitante }}</td>
+              <td><span [class]="clasePrioridad(ticket.prioridad)">{{ ticket.prioridad }}</span></td>
+              <td>
+                <div class="status-cell">
+                  <span class="status-label">{{ ticket.estado }}</span>
+                  <progress
+                    class="status-progress"
+                    [class.status-progress--complete]="progresoEstado(ticket.estado) === 100"
+                    [value]="progresoEstado(ticket.estado)"
+                    max="100"
+                    [attr.aria-label]="'Avance: ' + progresoEstado(ticket.estado) + '%'">
+                  </progress>
+                  <span class="progress-label">{{ progresoEstado(ticket.estado) }}%</span>
+                </div>
+              </td>
+              <td class="actions-cell">
+                <button type="button" (click)="editar(ticket.id)">Editar</button>
+                <button type="button" (click)="eliminar(ticket.id)">Eliminar</button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 }
