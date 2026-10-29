@@ -1,14 +1,14 @@
 Sistema de Gestión de Soporte Técnico
 
-==================================================
-AUTOR
-==================================================
+
+#AUTOR
+
 
 Anthony Rebolledo
 
-==================================================
+========================
 DESCRIPCIÓN DEL PROYECTO
-==================================================
+========================
 
 Aplicación web desarrollada con Angular 22, Node.js,
 Express y MySQL para administrar tickets de soporte
@@ -32,9 +32,9 @@ Cada ticket contiene:
 - Estado
 - Fecha de registro
 
-==================================================
+======================
 TECNOLOGÍAS UTILIZADAS
-==================================================
+======================
 
 Frontend:
 - Angular 22
@@ -56,9 +56,9 @@ Herramientas:
 - Git
 - GitHub
 
-==================================================
+===========
 INSTALACIÓN
-==================================================
+===========
 
 1. Clonar repositorio
 
@@ -80,9 +80,9 @@ cd ../soporte-angular
 
 npm install
 
-==================================================
+===========
 EJECUCIÓN
-==================================================
+===========
 
 1. Iniciar MySQL
 
@@ -108,9 +108,9 @@ Aplicación disponible en:
 
 http://localhost:4200
 
-==================================================
+================================
 ESTRUCTURA GENERAL DEL PROYECTO
-==================================================
+================================
 
 evaluacion-angular
 │
@@ -132,9 +132,9 @@ evaluacion-angular
 │
 └── db.sql
 
-==================================================
+=============================
 FUNCIONALIDADES IMPLEMENTADAS
-==================================================
+=============================
 
 Tickets
 
@@ -167,9 +167,9 @@ Persistencia
 - Consultas parametrizadas
 - Persistencia real de datos
 
-==================================================
+==================
 PRUEBAS REALIZADAS
-==================================================
+==================
 
 GET
 
@@ -204,9 +204,9 @@ Resultado:
 
 Proyecto compilado sin errores.
 
-==================================================
+==============================================
 DECLARACIÓN DE USO DE INTELIGENCIA ARTIFICIAL
-==================================================
+==============================================
 
 Herramienta utilizada
 
@@ -239,6 +239,6 @@ Todo el código generado fue:
 El estudiante comprende y puede explicar cada uno de
 los elementos incorporados en la solución.
 
-==================================================
+==================
 FIN DEL DOCUMENTO
-==================================================
+==================
